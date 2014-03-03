@@ -96,9 +96,15 @@ public class SchoolCalendarWidget extends Composite {
       for (int i = 0, n = rows.length; i < n; i++) {
         Person person = people[i];
         rows[i] = new String[3];
-        rows[i][0] = person.getName();
-        rows[i][1] = person.getDescription();
-        rows[i][2] = person.getSchedule(daysFilter);
+        // Show the row data as per 'person type' filter selection
+        // TODO: Filtering mechanism is implemented as per current application
+        // architecture. This should be done better otherwise.
+        if ( (person instanceof Professor && personFilter[0]) || 
+        		(!(person instanceof Professor) && personFilter[1])) {
+            rows[i][0] = person.getName();
+            rows[i][1] = person.getDescription();
+            rows[i][2] = person.getSchedule(daysFilter);        	
+        }
       }
       acceptor.accept(startRow, rows);
     }
@@ -108,6 +114,12 @@ public class SchoolCalendarWidget extends Composite {
 
   private final boolean[] daysFilter = new boolean[] {
       true, true, true, true, true, true, true};
+  /* This is not quite the best way to filter data, but given current structure of the 
+   * code + pending research on how GWT CheckBox name/value works, proceeding with this
+   * nonetheless.
+   */
+  private final boolean[] personFilter = new boolean[] {
+		  true, true};
 
   private final DynaTableWidget dynaTable;
 
@@ -147,4 +159,27 @@ public class SchoolCalendarWidget extends Composite {
       DeferredCommand.addCommand(pendingRefresh);
     }
   }
+  
+  protected boolean getPersonIncluded(int personIndex) {
+    return personFilter[personIndex];
+  }
+  
+  protected void setPersonIncluded(int personIndex, boolean included) {
+	    if (personFilter[personIndex] == included) {
+	      // No change.
+	      //
+	      return;
+	    }
+
+	    personFilter[personIndex] = included;
+	    if (pendingRefresh == null) {
+	      pendingRefresh = new Command() {
+	        public void execute() {
+	          pendingRefresh = null;
+	          dynaTable.refresh();
+	        }
+	      };
+	      DeferredCommand.addCommand(pendingRefresh);
+	    }
+	  }
 }

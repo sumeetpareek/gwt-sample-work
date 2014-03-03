@@ -51,13 +51,13 @@ public class SchoolCalendarServiceImpl extends RemoteServiceServlet implements
 
   private static final int CLASS_LENGTH_MINS = 50;
 
-  private static final int MAX_SCHED_ENTRIES = 5;
+  private static final int MAX_SCHED_ENTRIES = 3;
 
   private static final int MIN_SCHED_ENTRIES = 1;
 
-  private static final int MAX_PEOPLE = 100;
+  private static final int MAX_PEOPLE = 45;
 
-  private static final int STUDENTS_PER_PROF = 5;
+  private static final int STUDENTS_PER_PROF = 2;
 
   private final List<Person> people = new ArrayList<Person>();
 

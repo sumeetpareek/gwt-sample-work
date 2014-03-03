@@ -39,6 +39,13 @@ public class DynaTable implements EntryPoint {
         DayFilterWidget filter = new DayFilterWidget(calendar);
         slot.add(filter);
       }
+      // Find the slot for the person-type filter widget.
+      //
+      slot = RootPanel.get("person-type");
+      if (slot != null) {
+    	PersonFilterWidget filter = new PersonFilterWidget(calendar);
+        slot.add(filter);
+      }
     }
   }
 }
