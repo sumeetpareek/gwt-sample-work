@@ -52,7 +52,7 @@ public class PersonFilterWidget extends Composite {
 	public PersonFilterWidget(SchoolCalendarWidget calendar) {
 		this.calendar = calendar;
 		initWidget(outer);
-		setStyleName("kaka");
+		setStyleName("DynaTable-PersonFilterWidget");
 		outer.add(new PersonCheckBox("Professor", 0));
 		outer.add(new PersonCheckBox("Student", 1));
 		
