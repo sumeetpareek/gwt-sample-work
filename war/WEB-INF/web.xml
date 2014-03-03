@@ -8,8 +8,18 @@
 
   <!-- Default page to serve -->
   <welcome-file-list>
-    <welcome-file>Dynatable.html</welcome-file>
+    <welcome-file>DynaTable.html</welcome-file>
   </welcome-file-list>
+
+  <!-- Servlets -->
+  <servlet>
+    <servlet-name>calendar</servlet-name>
+    <servlet-class>com.google.gwt.sample.dynatable.server.SchoolCalendarServiceImpl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>calendar</servlet-name>
+    <url-pattern>/dynatable/calendar</url-pattern>
+  </servlet-mapping>
   
   <!-- Servlets -->
   <servlet>
